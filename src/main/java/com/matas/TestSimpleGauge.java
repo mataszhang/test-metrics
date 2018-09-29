@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/9/29 13:33
  * @email mataszhang@163.com
  */
-public class SimpleGauge {
+public class TestSimpleGauge {
     private static final MetricRegistry metricRegistry = new MetricRegistry();
     private static final ConsoleReporter consoleReporter = ConsoleReporter.forRegistry(metricRegistry)//
             .convertDurationsTo(TimeUnit.MILLISECONDS)//
@@ -24,7 +24,7 @@ public class SimpleGauge {
     private static final BlockingQueue<Long> queue = new LinkedBlockingQueue<>(10);
 
     public static void main(String[] args) {
-        metricRegistry.register(MetricRegistry.name(SimpleGauge.class, "queue-count"), (Gauge<Integer>) queue::size);
+        metricRegistry.register(MetricRegistry.name(TestSimpleGauge.class, "queue-count"), (Gauge<Integer>) queue::size);
 
         consoleReporter.start(1, TimeUnit.SECONDS);
 

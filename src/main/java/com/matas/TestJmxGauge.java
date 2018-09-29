@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/9/29 13:33
  * @email mataszhang@163.com
  */
-public class JmxGauge {
+public class TestJmxGauge {
     private static final MetricRegistry metricRegistry = new MetricRegistry();
     private static final ConsoleReporter consoleReporter = ConsoleReporter.forRegistry(metricRegistry)//
             .convertDurationsTo(TimeUnit.MILLISECONDS)//
@@ -25,8 +25,8 @@ public class JmxGauge {
     private static final BlockingQueue<Long> queue = new LinkedBlockingQueue<>(10);
 
     public static void main(String[] args) throws MalformedObjectNameException, InterruptedException {
-        metricRegistry.register(MetricRegistry.name(JmxGauge.class, "HeapMemoryUsage"), new JmxAttributeGauge(new ObjectName("java.lang:type=Memory"), "HeapMemoryUsage"));
-        metricRegistry.register(MetricRegistry.name(JmxGauge.class, "NonHeapMemoryUsage"), new JmxAttributeGauge(new ObjectName("java.lang:type=Memory"), "NonHeapMemoryUsage"));
+        metricRegistry.register(MetricRegistry.name(TestJmxGauge.class, "HeapMemoryUsage"), new JmxAttributeGauge(new ObjectName("java.lang:type=Memory"), "HeapMemoryUsage"));
+        metricRegistry.register(MetricRegistry.name(TestJmxGauge.class, "NonHeapMemoryUsage"), new JmxAttributeGauge(new ObjectName("java.lang:type=Memory"), "NonHeapMemoryUsage"));
 
         consoleReporter.start(5, TimeUnit.SECONDS);
 
