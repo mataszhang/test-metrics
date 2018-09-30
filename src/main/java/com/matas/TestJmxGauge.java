@@ -6,8 +6,6 @@ import com.codahale.metrics.MetricRegistry;
 
 import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,8 +19,6 @@ public class TestJmxGauge {
             .convertDurationsTo(TimeUnit.MILLISECONDS)//
             .convertRatesTo(TimeUnit.MILLISECONDS)//
             .build();
-
-    private static final BlockingQueue<Long> queue = new LinkedBlockingQueue<>(10);
 
     public static void main(String[] args) throws MalformedObjectNameException, InterruptedException {
         metricRegistry.register(MetricRegistry.name(TestJmxGauge.class, "HeapMemoryUsage"), new JmxAttributeGauge(new ObjectName("java.lang:type=Memory"), "HeapMemoryUsage"));
